@@ -9,3 +9,7 @@ if(isset($_FILES['poster']['tmp_name'])){
     move_uploaded_file($_FILES['poster']['tmp_name'],"../upload/".$_FILES['poster']['name']);
     $_POST['poster']=$_FILES['poster']['name'];
 }
+$_POST['sh']=1;
+$_POST['rank']=$Movie->max("rank")+1;
+$Movie->save($_POST);
+to("../back.php?do=movie");
