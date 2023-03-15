@@ -6,7 +6,12 @@ class DB
     protected $table;
     protected $dns = "mysql:host=localhost;charset=utf8;dbname=db0301";
     protected $pdo;
-
+    public $level=[
+        1=>'普遍級',
+        2=>'輔導級',
+        3=>'保護級',
+        4=>'限制級'
+    ];
     public function __construct($table)
     {
         $this->table = $table;
@@ -134,7 +139,10 @@ header("location:$url");
 function q($sql){
     $dns = "mysql:host=localhost;charset=utf8;dbname=db0301";
     $pdo=new PDO($dns,'root','');
-    $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    // echo $sql;
+   $row= $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $row;
 }
 $Trailer=new Db('trailer');
 $Movie=new Db('movie');
