@@ -21,7 +21,7 @@
                     <button onclick="sw('Movie',<?= $row['id'] ?>,<?= $prev; ?>)">往上</button>
                     <button onclick="sw('Movie',<?= $row['id'] ?>,<?= $next; ?>)">往下</button>
                     <button onclick="location.href='?do=edit_movie&id=<?=$row['id']?>'">編輯電影</button>
-                    <button onclick="del(<?=$row['id']?>)">刪除電影</button>
+                    <button onclick="del('Movie',<?=$row['id']?>)">刪除電影</button>
                 </div>
                 <div>
                     劇情介紹:<?=$row['intro'];?>
@@ -32,18 +32,3 @@
     }
     ?>
 </div>
-<script>
-function sw(table,id,id2){
-$.post("api/sw.php",{table,id,id2},(res)=>{
-    location.reload()
-    console.log(res);
-})
-} 
-function showMovie(id){
-    $.post("api/edit_movie.php",{id},(res)=>{
-    location.reload()
-    console.log(res);
-})
-}
-
-</script>

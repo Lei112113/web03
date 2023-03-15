@@ -23,8 +23,8 @@
                         <input type="button" value="往下" onclick="sw('Trailer',<?=$t['id']?>,<?=$next;?>)">
                     </td>
                     <td>
-                        <input type="checkbox" name="sh[]" value="<?= $t['id'] ?>" <?= $checked ?>>&nbsp;
-                        <input type="checkbox" name="del[]" value="<?= $t['id'] ?>">&nbsp;
+                        <input type="checkbox" name="sh[]" value="<?= $t['id'] ?>" <?= $checked ?>>顯示&nbsp;
+                        <input type="checkbox" name="del[]" value="<?= $t['id'] ?>">刪除&nbsp;
                         <select name="ani[]" id="">
                             <option value="1" <?= ($t['ani'] == 1) ? 'selected' : ''; ?>>淡入淡出</option>
                             <option value="2" <?= ($t['ani'] == 2) ? 'selected' : ''; ?>>滑入滑出</option>
@@ -58,12 +58,3 @@
 
 </form>
 
-<script>
-function sw(table,id,id2){
-$.post("api/sw.php",{table,id,id2},(res)=>{
-    location.reload()
-    console.log(res);
-})
-} 
-
-</script>

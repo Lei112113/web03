@@ -20,11 +20,11 @@
     <a href="index.php?do=mem">會員系統</a> 
     <a href="back.php">管理系統</a> </div>
     <div id="text"> <span class="ct">最新活動</span>
-      <marquee direction="right">
-        ABC影城票價全面八折優惠1個月
-      </marquee>
-    </div>
-    <div id="mm">
+    <marquee direction="right">
+      ABC影城票價全面八折優惠1個月
+    </marquee>
+  </div>
+  <div id="mm">
     <?php 
       $do=$_GET['do']??'main';
       $file="./front/$do.php"; 
@@ -41,3 +41,4 @@
 </body>
 
 </html>
+<script src="js/js.js"></script>

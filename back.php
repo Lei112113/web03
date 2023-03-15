@@ -67,3 +67,4 @@ if(!empty($_POST)){
 </body>
 
 </html>
+<script src="js/js.js"></script>

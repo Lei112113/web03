@@ -51,6 +51,7 @@ class DB
         } else {
             $sql .= " where `id`=" . $id;
         }
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
 
