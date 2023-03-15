@@ -1,14 +1,131 @@
+<style>
+ #poster{
+  width: 420px;
+  height:400px;
+  position: relative;
+ } 
+
+ .lists{
+  width:210px;
+  height:280px;
+  position: relative;
+  margin: auto; /*讓海報維持在中間 */
+  overflow: hidden;
+ }
+ .pos{
+  width:210px;
+  height:280px;
+  /* background-color: white; */
+  position: absolute;
+  text-align: center;
+  display: none;
+ }
+
+ .pos img{
+    width: 100%;
+    height: 260px;
+ }
+.controls{
+  width: 420px;
+  height:110px;
+/*   background-color: lightblue; */
+  margin: 10px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position:absolute;
+  bottom:0;
+}
+
+.left,.right{
+  border-top:20px solid transparent;
+  border-bottom:20px solid transparent;
+}
+.left{
+  border-right:20px solid blue;
+}
+.right{
+  border-left:20px solid blue;
+}
+
+.btns{
+  width:320px;
+  /* background:green; */
+  height:100px;
+  display: flex;
+  overflow: hidden;  /*讓超過四個元件寬度的其他內容隱蔵 */
+}
+
+.btn{
+  width:80px;
+  font-size:12px;
+  text-align: center;
+  flex-shrink: 0;   /*讓子元素維持自己的寬度 */
+  box-sizing: border-box;  /*讓元件總寬度不受padding影嚮 */
+  padding:3px;
+  position:relative;
+}
+
+.btn img{
+  width:100%;
+  height:80px;
+
+}
+
+</style>
+
 <div class="half" style="vertical-align:top;">
     <h1>預告片介紹</h1>
     <div class="rb tab" style="width:95%;">
-        <div id="abgne-block-20111227">
-            <ul class="lists">
-            </ul>
-            <ul class="controls">
-            </ul>
+        <div id="poster">
+            <div class="lists">
+                <?php
+                $posters = $Trailer->all(['sh' => 1]," order by rank");
+                foreach ($posters as $poster) {
+                ?>
+                    <div class="pos" data-ani="<?$poster['ani']?>">
+                        <img src="./upload/<?=$poster['img']?>" alt="">
+                        <div><?=$poster['name']?></div>
+                    </div>
+                <?php
+                }
+                ?>
+
+            </div>
+        </div>
+        <div class="controls">
+            <div class="left"></div>
+            <div class="btn">
+                <img src="./upload/<?=$poster['img']?>" alt="">
+                <div><?=$poster['name'];?></div>
+            </div>
+            <div class="right"></div>
         </div>
     </div>
 </div>
+<script>
+    $(".pos").eq(0).show();
+       
+       let btns=$(".btn").length;
+       let p=0;
+       $(".right,.left").on("click",function(){
+           
+         if($(this).hasClass('left')){
+           //if(p - 1 >= 0) 
+             p=(p - 1 >= 0)? p-1 : p;
+         }else{
+          // if(p + 1 <= btns - 4) 
+             p=(p + 1 <= btns - 4)? p+1 : p;
+         }
+ 
+             $(".btn").animate({right:80*p});
+         })
+         let now=0;
+         let counter=setInterval(()=>{
+            ani();
+         },3000)
+
+</script>
 <div class="half">
     <h1>院線片清單</h1>
     <div class="rb tab" style="width:95%;">
@@ -45,14 +162,14 @@
         </div>
         <div class="ct">
             <?php
-            for ($i=1; $i <=$pages ; $i++) { 
-                $size=($i==$now)?'20px':'16px';
+            for ($i = 1; $i <= $pages; $i++) {
+                $size = ($i == $now) ? '20px' : '16px';
                 echo "<a href='index.php?p=$i' style='font-size:$size'>";
                 echo $i;
                 echo "</a>";
             }
             ?>
-            
+
         </div>
     </div>
 </div>
